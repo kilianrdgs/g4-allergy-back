@@ -5,18 +5,22 @@ const URI: string = process.env.MONGO_URI || '';
 
 const User = require('../models/userModel');
 
-function main(){
+async function main(){
+    
     mongoose.connect(URI)
+
+//    await utilisateur.save().then(() => console.log('utilisateur enregistré'));
 }
 
 const utilisateur = new User({
     name: 'admin',
     email: 'test@gmail.com',
     password: 'azertyuiop',
-    isAdmin: true
+    allergies: ['lait', 'gluten'],
+    isAdmin: false
 });
 
-// utilisateur.save().then(() => console.log('utilisateur enregistré'));
+
 
 
 export default main;
