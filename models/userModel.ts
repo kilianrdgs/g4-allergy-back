@@ -15,9 +15,6 @@ const schema = new mongoose.Schema({
         type: String,
         required: true
     },
-    allergies: {
-        type: Array,
-    },
     isAdmin: {
         type: Boolean,
         required: true,
