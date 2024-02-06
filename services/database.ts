@@ -3,15 +3,20 @@ dotenv.config();
 const mongoose = require('mongoose');
 const URI: string = process.env.MONGO_URI || '';
 
+const User = require('../models/userModel');
+
 function main(){
     mongoose.connect(URI)
 }
 
-    
-// const Cat = mongoose.model('Cat', { name: String }, 'cats');
-// const kitty = new Cat({ name: 'Zildjian' });
+const utilisateur = new User({
+    name: 'admin',
+    email: 'test@gmail.com',
+    password: 'azertyuiop',
+    isAdmin: true
+});
 
-// kitty.save().then(() => console.log('meow'));
+// utilisateur.save().then(() => console.log('utilisateur enregistré'));
 
 
 export default main;
