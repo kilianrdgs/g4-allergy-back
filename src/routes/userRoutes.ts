@@ -1,4 +1,5 @@
 import express from 'express';
+import { loginUser } from '../controllers/userController';
 const router = express.Router();
 
 //route pour ajouter un user
@@ -8,10 +9,7 @@ router.post('/user', (req, res) => {
     });
 
 //route pour se connecter
-router.post('/login', (req, res) => {
-    const message:String = 'connexion';
-    res.json(message);
-    });
+router.post('/connexion', loginUser);
 
 
 export default router;
