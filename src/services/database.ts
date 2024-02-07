@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 const URI: string = process.env.MONGO_URI || '';
 
 const User = require('../models/userModel');
-const Allergy = require('../models/allergyModel');
 
 async function main(){
 
@@ -21,12 +20,6 @@ const utilisateur = new User({
     isAdmin: false
 });
 
-const allergie = new Allergy({
-    name: 'test',
-    description: 'test',
-    createdBy: '0731263829312',
-    isPrivate: true
-});
 
 
 
