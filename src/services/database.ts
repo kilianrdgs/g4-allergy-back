@@ -10,3 +10,5 @@ export default async function main(){
         console.error(`erreur lors de la  connexion : ${error}`);
     }
 }
+
+export default main;
