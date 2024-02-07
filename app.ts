@@ -22,7 +22,7 @@ app.get('/', (req: Request, res: Response) => {
   res.json('Hello World!');
 });
 
-app.listen(port, () => {
+app.listen(port, '0.0.0.0', () => {
   console.log(`serveur port: ${port}`);
 });
 
