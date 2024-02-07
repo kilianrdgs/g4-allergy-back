@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import bcrypt from 'bcrypt';
 const User = require('../models/userModel');
 import jwt from 'jsonwebtoken';
 
@@ -28,7 +29,8 @@ const loginUser = async (req: Request, res: Response) => {
             return res.status(401).json({ message: 'Identifiants incorrects' });
         }
 
-        if (password !== user.password) {
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if (!isPasswordValid) {
             return res.status(401).json({ message: 'Identifiants incorrects' });
         }
 
