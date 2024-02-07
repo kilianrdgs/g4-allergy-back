@@ -22,25 +22,31 @@ const createUser = async (req: Request, res: Response) => {
 
 const loginUser = async (req: Request, res: Response) => {
     try {
-        const { email, password } = req.body;
-
+        const email = req.body.email;
+        const password = req.body.password
         const user = await User.findOne({ email });
+
         if (!user) {
             return res.status(401).json({ message: 'Identifiants incorrects' });
         }
-
+        
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
             return res.status(401).json({ message: 'Identifiants incorrects' });
         }
-
-        const token = jwt.sign({ userId: user._id }, 'secret');
-
-        res.status(200).json({ token });
+        const authToken = await user.generateAuthTokenAndSaveUser();
+        console.log(authToken);
+        res.send(user)
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Erreur lors de la connexion' });
     }
 };
 
-export { loginUser, createUser };
+const logoutUser = async (req: Request, res: Response) => {
+    req.body.user.authTokens = []
+    await req.body.user.save();
+    res.json('succes')
+}
+
+export { loginUser, createUser, logoutUser };

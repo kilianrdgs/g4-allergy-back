@@ -21,8 +21,21 @@ const schema = new mongoose.Schema({
         type: Boolean,
         required: true,
         default: false
-    }
+    },
+    authTokens: [{
+        authToken: {
+            type: String,
+            required: true
+        }
+      }]
 });
+
+schema.methods.generateAuthTokenAndSaveUser = async function(){
+    const authToken = jwt.sign({ _id: this._id.toString()}, 'token');
+    this.authTokens.push({authToken});
+    await this.save();
+    return authToken;
+  }
 
 schema.pre("save", async function () {
     if (this.isModified("password")) {
