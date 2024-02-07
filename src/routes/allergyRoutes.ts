@@ -8,4 +8,9 @@ router.get('/list', async (req, res) => {
     res.send(list)
 })
 
+router.get('/list/:name', async (req, res) => {
+    const list = await allergyController.getPersonalAllergyList(req)
+    res.send(list)
+})
+
 export default router
