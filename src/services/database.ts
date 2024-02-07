@@ -9,8 +9,4 @@ export default async function main(){
     } catch (error) {
         console.error(`erreur lors de la  connexion : ${error}`);
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 0e17f97 (fix bug crash)
