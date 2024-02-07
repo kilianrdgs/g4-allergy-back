@@ -10,22 +10,21 @@ async function main(){
 
     mongoose.connect(URI)
 
-//    await utilisateur.save().then(() => console.log('utilisateur enregistré'));
-// await allergie.save().then(() => console.log('allergie enregistrée'));
+    // await utilisateur.save().then(() => console.log('utilisateur enregistré'));
+    // await allergie.save().then(() => console.log('allergie enregistrée'));
 }
 
 const utilisateur = new User({
-    name: 'admin',
-    email: 'test@gmail.com',
+    name: 'admin2',
+    email: 'test2@gmail.com',
     password: 'azertyuiop',
     isAdmin: false
 });
 
 const allergie = new Allergy({
-    name: 'test',
-    description: 'test',
-    createdBy: '0731263829312',
-    isPrivate: true
+    name: 'Pollen',
+    createdBy: utilisateur._id,
+    isPrivate: false
 });
 
 
