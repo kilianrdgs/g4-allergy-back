@@ -8,4 +8,8 @@ router.get('/list', async (req, res) => {
     res.send(list)
 })
 
+router.post('/formulaire', async (req, res) => {
+    allergyController.createAllergy(req, res)
+});
+
 export default router
