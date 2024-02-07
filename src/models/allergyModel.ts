@@ -5,11 +5,9 @@ const schema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    description: {
-        type: String
-    },
     createdBy: {
-        type: String
+        type: mongoose.Schema.ObjectId,
+        ref: 'users'
     },
     isPrivate: {
         type: Boolean,
