@@ -2,6 +2,23 @@ import { Request, Response } from 'express';
 const User = require('../models/userModel');
 import jwt from 'jsonwebtoken';
 
+
+const createUser = async (req: Request, res: Response) => {
+    const utilisateur = new User({
+        name: req.body.name,
+        email: req.body.email,
+        password: req.body.password,
+        isAdmin: false
+    })
+    try {
+        await utilisateur.save()
+           return res.status(201).json({ message: 'utilisateur créé' });
+    } catch (error) {
+        return res.status(401).json({ message: "impossible de créer un utilisateur" });
+    }
+    
+};
+
 const loginUser = async (req: Request, res: Response) => {
     try {
         const { email, password } = req.body;
@@ -24,4 +41,4 @@ const loginUser = async (req: Request, res: Response) => {
     }
 };
 
-export { loginUser };
+export { loginUser, createUser };

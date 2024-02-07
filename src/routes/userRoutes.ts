@@ -1,12 +1,9 @@
 import express from 'express';
-import { loginUser } from '../controllers/userController';
+import { loginUser, createUser } from '../controllers/userController';
 const router = express.Router();
 
 //route pour ajouter un user
-router.post('/user', (req, res) => {
-    const message:String = 'authentification';
-    res.json(message);
-    });
+router.post('/user', createUser);
 
 //route pour se connecter
 router.post('/connexion', loginUser);
