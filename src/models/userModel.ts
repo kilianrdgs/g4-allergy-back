@@ -1,4 +1,6 @@
 import mongoose from 'mongoose';
+const bcrypt = require("bcrypt");
+const jwt = require('jsonwebtoken')
 
 const schema = new mongoose.Schema({
     name: {
@@ -21,6 +23,12 @@ const schema = new mongoose.Schema({
         default: false
     }
 });
+
+schema.pre("save", async function () {
+    if (this.isModified("password")) {
+      this.password = await bcrypt.hash(this.password, 8);
+    }
+  });  
 
 const User = mongoose.model("users", schema, "users");
 
