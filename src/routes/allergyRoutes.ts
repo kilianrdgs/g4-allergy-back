@@ -13,4 +13,8 @@ router.get('/list/:name', async (req, res) => {
     res.send(list)
 })
 
+router.delete("/:id", async (req, res) => {
+    await allergyController.deleteAllergy(req)
+})
+
 export default router

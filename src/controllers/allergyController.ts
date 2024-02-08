@@ -1,9 +1,10 @@
 import express, { Request, Response } from 'express'
 const User = require('../models/userModel')
 const Allergy = require('../models/allergyModel')
+import mongoose from 'mongoose'
 
 async function getAllergyList() {
-    const allergyList = await Allergy.find({ isPrivate: false }, "name").populate("createdBy", "name")
+    const allergyList = await Allergy.find({ isPrivate: false }, "name").populate("createdBy", "name isAdmin")
     return allergyList
 }
 
@@ -13,4 +14,8 @@ async function getPersonalAllergyList(req: Request) {
     return allergyList
 }
 
-export default { getAllergyList, getPersonalAllergyList }
+async function deleteAllergy(req: Request) {
+    await Allergy.findByIdAndDelete(new mongoose.Types.ObjectId(req.params.id))
+}
+
+export default { getAllergyList, getPersonalAllergyList, deleteAllergy }
