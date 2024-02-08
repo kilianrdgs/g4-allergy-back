@@ -6,3 +6,5 @@
 
 # Ignore le fichier .env
 .env
+
+.idea/
