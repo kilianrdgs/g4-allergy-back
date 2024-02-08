@@ -9,6 +9,11 @@ router.post('/user', createUser);
 //route pour se connecter
 router.post('/connexion', loginUser);
 
+//verifier si l'utilisateur est connecté 
+router.get('/isConnected', authentication , (req, res) => {
+    res.json(true);
+});
+
 //route pour se deconnecter
 router.post('/deconnexion', authentication , logoutUser);
 
