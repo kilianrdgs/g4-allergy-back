@@ -4,6 +4,7 @@ dotenv.config();
 const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken')
 const salt: number = process.env.SALT ? parseInt(process.env.SALT) : 10;
+const secret_key: string = process.env.SECRET_KEY || '';
 
 const schema = new mongoose.Schema({
     name: {
@@ -25,19 +26,10 @@ const schema = new mongoose.Schema({
         required: true,
         default: false
     },
-    authTokens: [{
-        authToken: {
-            type: String,
-            required: true
-        }
-      }]
 });
 
 schema.methods.generateAuthTokenAndSaveUser = async function(){
-    const authToken = jwt.sign({ _id: this._id.toString()}, 'token');
-    this.authTokens.push({authToken});
-    await this.save();
-    console.log(salt)
+    const authToken = jwt.sign({ _id: this._id.toString()}, secret_key);
     return authToken;
   }
 

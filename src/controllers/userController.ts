@@ -36,7 +36,7 @@ const loginUser = async (req: Request, res: Response) => {
         }
         const authToken = await user.generateAuthTokenAndSaveUser();
         console.log(authToken);
-        res.send(user)
+        res.json(authToken)
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Erreur lors de la connexion' });
