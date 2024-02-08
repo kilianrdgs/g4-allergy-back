@@ -8,7 +8,7 @@ const authentication = async (req: Request, res: Response, next: NextFunction) =
         if (!authToken) {
             throw new Error('Missing authorization token');
         }
-        const decodedToken: any = jwt.verify(authToken, 'token'); // Assurez-vous de remplacer 'token' par votre clé secrète réelle
+        const decodedToken: any = jwt.verify(authToken, process.env.CLE as string);
         const user = await User.findOne({ _id: decodedToken._id, 'authTokens.authToken': authToken });
         if (!user) {
             throw new Error('User not found');
