@@ -9,9 +9,17 @@ async function getAllergyList(req: Request, res: Response) {
 }
 
 async function getPersonalAllergyList(req: Request, res: Response) {
-    const currentUser = await User.findOne({ name: req.params.name }, '_id')
-    const allergyList = await Allergy.find({ createdBy: currentUser._id }, "name")
-    res.send(allergyList)
+    try {
+        const userId = req.body.user._id
+        if(!userId) {
+            res.status(404).json({"message": "Utilisateur non trouvé"})
+        }
+        const allergyList = await Allergy.find({ createdBy: userId }, "name")
+        res.send(allergyList)
+    }
+    catch (e) {
+        res.status(500).send(e)
+    }
 }
 
 async function deleteAllergy(req: Request, res: Response) {
@@ -20,7 +28,7 @@ async function deleteAllergy(req: Request, res: Response) {
         res.status(204)
     }
     catch (e) {
-        res.status(404).send(e)
+        res.status(500).send(e)
     }
 }
 
