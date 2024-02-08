@@ -13,9 +13,9 @@ const createUser = async (req: Request, res: Response) => {
     })
     try {
         await utilisateur.save()
-           return res.status(201).json({ message: 'utilisateur créé' });
+           return res.status(201).json({ message: 'utilisateur créé', "status": true  });
     } catch (error) {
-        return res.status(401).json({ message: "impossible de créer un utilisateur" });
+        return res.json({ message: 'Erreur lors de la création de l\'utilisateur', "status": false });
     }
     
 };
@@ -39,7 +39,7 @@ const loginUser = async (req: Request, res: Response) => {
         res.json(authToken)
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Erreur lors de la connexion' });
+        res.json({ message: 'Email ou Mot de passe incorrect' });
     }
 };
 
