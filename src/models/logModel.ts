@@ -1,12 +1,11 @@
-import mongoose from 'mongoose';
-import {Int32} from "mongodb";
+import mongoose, {Schema} from 'mongoose';
 
 const schema = new mongoose.Schema({
     method: {
         type: String,
         required: true,
     },
-    url: {
+    path: {
         type: String,
         required: true
     },
@@ -14,6 +13,13 @@ const schema = new mongoose.Schema({
         type: Number,
         required: true,
     },
+    timestamp: {
+        type: Date,
+        default: Date.now
+    },
+    responseTime: {
+        type: Number
+    }
 });
 
 const Log = mongoose.model("logs", schema, "logs");
