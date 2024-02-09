@@ -10,4 +10,6 @@ router.get('/list/:name', authentication, allergyController.getPersonalAllergyLi
 
 router.delete("/:id", allergyController.deleteAllergy)
 
+router.post('/formulaire', authentication, allergyController.createAllergy);
+
 export default router
