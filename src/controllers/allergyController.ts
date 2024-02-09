@@ -32,4 +32,24 @@ async function deleteAllergy(req: Request, res: Response) {
     }
 }
 
-export default { getAllergyList, getPersonalAllergyList, deleteAllergy }
+async function createAllergy(req: Request, res: Response) {
+  try {
+
+    // Créer une nouvelle instance de l'allergie avec les données du formulaire
+    const allergy = new Allergy({
+      name: req.body.name,
+      createdBy: req.body.user._id,
+      isPrivate: req.body.isPrivate
+    });
+
+    // Enregistrer l'allergie dans la base de données
+    await allergy.save();
+
+    return res.status(201).json({ message: 'Allergie créée avec succès' });
+  } catch (error) {
+    console.error(error);
+    return res.status(400).json({ message: 'Erreur lors de la création de l\'allergie' });
+  }
+};
+
+export default { getAllergyList, getPersonalAllergyList, deleteAllergy, createAllergy }
