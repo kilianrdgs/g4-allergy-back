@@ -35,10 +35,8 @@ const loginUser = async (req: Request, res: Response) => {
             return res.status(401).json({ message: 'Identifiants incorrects' });
         }
         const authToken = await user.generateAuthTokenAndSaveUser();
-        console.log(authToken);
         res.json(authToken)
     } catch (error) {
-        console.error(error);
         res.json({ message: 'Email ou Mot de passe incorrect' });
     }
 };
