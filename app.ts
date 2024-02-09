@@ -4,7 +4,6 @@ const port = 3001;
 import main from './src/services/database';
 import userRouter from "./src/routes/userRoutes";
 import allergyRouter from "./src/routes/allergyRoutes";
-import addLog from "./src/controllers/logController";
 const Log = require("./src/models/logModel");
 
 app.use((req, res, next) => {
