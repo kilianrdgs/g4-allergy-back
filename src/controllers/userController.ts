@@ -33,13 +33,10 @@ const loginUser = async (req: Request, res: Response) => {
         if (!isPasswordValid) {
             return res.status(401).json({ message: 'Identifiants incorrects' });
         }
-        
-        const authToken = jwt.sign({ _id: user._id.toString() }, secret_key, { expiresIn: '1h' });
-        
-        res.json({ authToken });
+        const authToken = await user.generateAuthTokenAndSaveUser();
+        res.json(authToken)
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Erreur lors de la connexion' });
+        res.json({ message: 'Email ou Mot de passe incorrect' });
     }
 };
 

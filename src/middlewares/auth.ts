@@ -7,14 +7,11 @@ const authentication = async (req: Request, res: Response, next: NextFunction) =
     
     try {
         const authToken: string | undefined = req.header('Authorization')?.replace('Bearer ', '');
-        console.log(authToken);
         if (!authToken) {
             throw new Error('Missing authorization token');
         }
         const decodedToken: any = jwt.verify(authToken, secret_key);
-        console.log(decodedToken);
         const user = await User.findOne({ _id: decodedToken._id});
-        console.log(user);
         if (!user) {
             throw new Error('User not found');
         }
