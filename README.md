@@ -20,7 +20,7 @@ yarn install
 bun install
 ```
 
-## Development Server
+## back Server
 
 Start the development server on `http://localhost:3001`:
 
@@ -38,22 +38,13 @@ yarn start
 bun start
 ```
 
-## Production
-
-Build the application for production:
-
+## back .env exemple
 ```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
+MONGO_URI = ""
+FRONTEND_URL = ""
+SECRET_KEY = ""
+SALT = ""
 ```
+
 
 
