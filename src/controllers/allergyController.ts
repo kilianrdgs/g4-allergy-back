@@ -39,7 +39,7 @@ async function createAllergy(req: Request, res: Response) {
     const allergy = new Allergy({
       name: req.body.name,
       createdBy: req.body.user._id,
-      isPrivate: req.body.isPrivate
+      isPrivate: req.body.isPrivate == "private"
     });
 
     // Enregistrer l'allergie dans la base de données
@@ -47,7 +47,6 @@ async function createAllergy(req: Request, res: Response) {
 
     return res.status(201).json({ message: 'Allergie créée avec succès' });
   } catch (error) {
-    console.error(error);
     return res.status(400).json({ message: 'Erreur lors de la création de l\'allergie' });
   }
 };
