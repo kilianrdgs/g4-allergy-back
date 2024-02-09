@@ -4,6 +4,8 @@ const port = 3001;
 import main from './src/services/database';
 import userRouter from "./src/routes/userRoutes";
 import allergyRouter from "./src/routes/allergyRoutes";
+import addLog from "./src/controllers/logController";
+const Log = require("./src/models/logModel");
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', process.env.FRONTEND_URL);
@@ -11,6 +13,16 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Headers', '*');
   next();
 });
+
+app.use(async (req, res, next) => {
+  const log = new Log({
+    method: req.method,
+    url: req.url,
+    statusCode: res.statusCode
+  })
+  await log.save()
+  next()
+})
 
 //Middlewares
 app.use(express.json());
